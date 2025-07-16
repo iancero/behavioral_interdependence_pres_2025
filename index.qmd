@@ -1,25 +1,179 @@
 ---
-# title: "Untitled"
-format: revealjs
+title: "Behavioral Interdependence"
+subtitle: "as a unifying framework for suicide, self-Injury, and non-suicidal self-harm"
+author: "Ian Cero, PhD"
+format: 
+  revealjs:
+    css: custom.css
+bibliography: references.bib
+editor: visual
 ---
 
-## Quarto
+## Interdependence
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+-   My best choice depends on your best response
 
-## Bullets
+## Some assumptions
 
-When you click the **Render** button a document will be generated that includes:
+-   Organisms have preferences for some outcomes over others
 
--   Content authored with markdown
--   Output from executable code
+-   They seek their preferred outcomes
 
-## Code
+-   We can define these preferences with numbers @bowling2023
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Some math
 
-```{r}
-1 + 1
+Utility
+
+:   The ***utility*** of an action is a function, $U(s, a)$ that takes states ($s_1, s_2, ...$) and ($s_1, s_2, ...$) returns a number from $-\infty$ to $+\infty$.
+
+$$
+\begin{align}
+U(a_1) &= 1.5 \\
+U(a_2) &= 2.0
+\end{align}
+$$
+
+All else equal, organisms choose actions with the highest *expected* utility for themselves.
+
+$$
+E[U(a_1)] < E[U(a_2)]
+$$
+
+## Some caveats
+
+-   Probably evolved through natural selection, but not necessary to assume here (you do you)
+
+-   But sometimes they make mistakes
+
+## A puzzle
+
+-   Social factors are well documented for suicide
+
+-   A high proportion of attempts and deaths are immediately preceeded
+
+## Interdependence
+
+## Three phenomena
+
+-   Suicidal behavior
+-   Non-suicidal self-harm (NSSI)
+-   Self-injurious behavior (SIB)
+
+## Scientific silos
+
+|  |  |  |
+|------------------------|------------------------|------------------------|
+| **SIB** | PDD, ID | ABA |
+| **NSSI** | Neurotypical adolescents | C&A Psychology |
+| **Suicidal behavior** | Neurotypical 15+ | Adult clinical psych, psychiatry, epidemiology |
+
+## ABA and NSSI / Suicide?
+
+-   Actual suicidal behavior plainly too infrequent (1-2x per lifetime)
+
+-   NSSI not (ethically) prompt-able in clinical setting
+
+![](single_case_nssi_design.png){fig-align="center" width="600"}
+
+[@rizvi2008]
+
+## Clinical Psych / MDs and SIB?
+
+-   Not often set up for contemporaneous self-harm
+
+-   Even primarily "behavioral" techniques (exposure) are heavily verbal
+
+-   Overall, ABA seems to have that under control...
+
+## Suicide vs NSSI research?
+
+-   Suicide reviewers: NSSI is not real suicidal behavior
+
+-   NSSI researchers: well, we never wanted to be in your club anyway
+
+-   IRB: do you want to do this study the easy way or the hard way (asking about suicide)
+
+-   DSM-5: we're probably going to make these different codes
+
+## And don't even bring up drug overdoses!
+
+![](overdoses.jpg){fig-align="center" width="1200"}
+
+-   **Nonsuicidal overdoses** were defined as intentional overdoses where the person states that they had no intention of dying *from the overdose*
+
+[@fox2016]
+
+## Intuitive topographical similarities
+
+-   Self-inflicted tissue damage
+-   70% of teens with NSSI reported a historic attempt @nock2006
+
+## What about functional similarities?
+
+-   XXX say something about automatic reinformcenet
+
+-   Social functions
+
+## Social functions in SIB
+
+Consider two inclusive reviews of functional analyses
+
+-   50 years of research (1961 - 2012)
+
+-   445 studies
+
+-   981 distinct FAs
+
+@beavers2013, @hanley2003
+
+------------------------------------------------------------------------
+
+Self-injury gets attention from stakeholders / researchers
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+df <- tribble(
+  ~topography,        ~undiff, ~diff, ~esc, ~attn, ~tang, ~auto, ~mult,
+  "Self-injury",         22,   282,   83,    63,    34,    76,    26,
+  "Aggression",          12,    95,   41,    21,    16,     2,    15,
+  "Property destruction", 0,     9,    2,     2,     2,     1,     2,
+  "Pica",                 0,    11,    0,     1,     0,     8,     2,
+  "Disruption",           0,    26,   11,     3,     1,     7,     4,
+  "Vocalizations",        3,    59,   15,    17,     6,    10,    11,
+  "Noncompliance",        0,    25,    9,     9,     3,     0,     4,
+  "Elopement",            0,    15,    0,     5,     4,     0,     6,
+  "Stereotypy",           1,    46,    7,     0,     0,    33,     6,
+  "Tantrums",             0,     8,    3,     1,     2,     0,     2,
+  "Other",                0,    30,    6,     6,     1,    11,     6,
+  "Aberrant",            21,   316,  120,    72,    32,     2,    90,
+  "Total",               59,   922,  297,   200,   101,   150,   174
+)
+
+plot_df <- df |> 
+  mutate(total_studies = undiff + diff) |> 
+  filter( ! topography %in% c("Total")) |> 
+  mutate(highlight = if_else(topography == "Self-injury", 1, 0))
+
+ggplot(
+  data = plot_df, 
+  mapping = aes(
+    x = reorder(topography, -total_studies), 
+    y = total_studies,
+    fill = factor(highlight)
+    )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    y = "Total Studies",
+    x = "") +
+  theme_bw() +
+  theme(
+    text = element_text(size = 16),
+    panel.background = element_rect(fill = "transparent", color = NA),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)) 
 ```
 
-
+## References
